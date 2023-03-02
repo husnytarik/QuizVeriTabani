@@ -5,6 +5,7 @@ import os
 import openpyxl
 import sqlite3
 
+
 def enter_data():
     question = question_entry.get("1.0", "end-1c")
     aopt = a_option_entry.get()
