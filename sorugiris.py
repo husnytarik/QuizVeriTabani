@@ -53,6 +53,7 @@ def enter_data():
         if query == "1.Ünite: Güneş, Dünya ve Ay":
             
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite1 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif5unite1 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -67,6 +68,7 @@ def enter_data():
             
         elif query == "2.Ünite: Canlılar Dünyası":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite2 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif5unite2 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -74,16 +76,12 @@ def enter_data():
             mycursor.execute(sql,data_insert_tuple)
             mydb.commit()
 
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
-
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "3.Ünite: Kuvvetin Ölçülmesi ve Sürtünme":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite3 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif5unite3 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -96,6 +94,7 @@ def enter_data():
             
         elif query == "4.Ünite: Madde ve Değişim":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite4 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif5unite4 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -108,6 +107,7 @@ def enter_data():
             
         elif query == "5.Ünite: Işığın Yayılması":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite5 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif5unite5 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -120,6 +120,7 @@ def enter_data():
             
         elif query == "6.Ünite: İnsan ve Çevre":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite6 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif5unite6 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -132,6 +133,7 @@ def enter_data():
             
         elif query == "7.Ünite: Elektrik Devre Elemanları":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite7 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif5unite7 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -146,6 +148,7 @@ def enter_data():
 
         elif query == "1.Ünite: Güneş Sistemi ve Tutulmalar":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite1 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif6unite1 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -158,6 +161,7 @@ def enter_data():
             
         elif query == "2.Ünite: Vücudumuzdaki Sistemler":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite2 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif6unite2 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -170,6 +174,7 @@ def enter_data():
             
         elif query == "3.Ünite: Kuvvet ve Hareket":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite3 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif6unite3 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -182,6 +187,7 @@ def enter_data():
             
         elif query == "4.Ünite: Madde ve Isı":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite4 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif6unite4 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -194,6 +200,7 @@ def enter_data():
             
         elif query == "5.Ünite: Ses ve Özellikleri":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite5 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif6unite5 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -206,6 +213,7 @@ def enter_data():
             
         elif query == "6.Ünite: Vücudumuzdaki Sistemler ve Sağlığı":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite6 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif6unite6 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -218,6 +226,7 @@ def enter_data():
             
         elif query == "7.Ünite: Elektriğin İletimi":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite7 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif6unite7 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -232,6 +241,7 @@ def enter_data():
 
         elif query == "1.Ünite: Güneş Sistemi ve Ötesi":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite1 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif7unite1 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -244,6 +254,7 @@ def enter_data():
             
         elif query == "2.Ünite: Hücre ve Bölünmeler":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite2 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif7unite2 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -256,6 +267,7 @@ def enter_data():
             
         elif query == "3.Ünite: Kuvvet ve Enerji":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite3 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif7unite3 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -268,6 +280,7 @@ def enter_data():
             
         elif query == "4.Ünite: Saf Madde ve Karışımlar":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite4 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif7unite4 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -280,6 +293,7 @@ def enter_data():
             
         elif query == "5.Ünite: Işığın Madde ile Etkileşimi":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite5 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif7unite5 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -292,6 +306,7 @@ def enter_data():
             
         elif query == "6.Ünite: Canlılarda Üreme, Büyüme ve Gelişme":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite6 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif7unite6 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -304,6 +319,7 @@ def enter_data():
             
         elif query == "7.Ünite: Elektrik Devreleri":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite7 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif7unite7 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -318,6 +334,7 @@ def enter_data():
 
         elif query == "1.Ünite: Mevsimler ve İklim":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite1 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif8unite1 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -330,6 +347,7 @@ def enter_data():
             
         elif query == "2.Ünite: DNA ve Genetik Kod":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite2 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif8unite2 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -342,6 +360,7 @@ def enter_data():
             
         elif query == "3.Ünite: Basınç":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite3 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif8unite3 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -351,6 +370,7 @@ def enter_data():
 
         elif query == "4.Ünite: Madde ve Endüstri":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite4 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif8unite4 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -363,6 +383,7 @@ def enter_data():
             
         elif query == "5.Ünite: Basit Makineler":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite5 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif8unite5 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -375,6 +396,7 @@ def enter_data():
             
         elif query == "6.Ünite: Enerji Dönüşümleri ve Çevre Bilimi":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite6 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif8unite6 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
@@ -387,6 +409,7 @@ def enter_data():
             
         elif query == "7.Ünite: Elektrik Yükleri ve Elektrik Enerjisi":
             mycursor = mydb.cursor()
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite7 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
             sql = "INSERT INTO sinif8unite7 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
