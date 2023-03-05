@@ -3,7 +3,14 @@ from tkinter import ttk
 from tkinter import messagebox
 import os
 import openpyxl
-import sqlite3
+import mysql.connector
+
+mydb = mysql.connector.connect(host="sql7.freesqldatabase.com",
+  port="3306",
+  user="sql7602430",
+  password="ePbVUdumsC",
+  database="sql7602430"
+)
 
 #commit test edildi
 
@@ -44,32 +51,28 @@ def enter_data():
         # 5. Sınıf
 
         if query == "1.Ünite: Güneş, Dünya ve Ay":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif5Unite1
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif5Unite1 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif5unite1 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
+            
+            print(mycursor.rowcount, "record inserted.")
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "2.Ünite: Canlılar Dünyası":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif5Unite2
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif5Unite2 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif5unite2 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             cursor = conn.cursor()
             cursor.execute(data_insert_query, data_insert_tuple)
@@ -80,90 +83,61 @@ def enter_data():
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "3.Ünite: Kuvvetin Ölçülmesi ve Sürtünme":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif5Unite3
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif5Unite3 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif5unite3 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "4.Ünite: Madde ve Değişim":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif5Unite4
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif5Unite4 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif5unite4 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "5.Ünite: Işığın Yayılması":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif5Unite5
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif5Unite5 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif5unite5 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "6.Ünite: İnsan ve Çevre":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif5Unite6
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif5Unite6 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif5unite6 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "7.Ünite: Elektrik Devre Elemanları":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif5Unite7
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif5Unite7 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif5unite7 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
@@ -171,127 +145,85 @@ def enter_data():
         # 6. Sınıf
 
         elif query == "1.Ünite: Güneş Sistemi ve Tutulmalar":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif6Unite1
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif6Unite1 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif6unite1 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "2.Ünite: Vücudumuzdaki Sistemler":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif6Unite2
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif6Unite2 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif6unite2 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "3.Ünite: Kuvvet ve Hareket":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif6Unite3
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif6Unite3 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif6unite3 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "4.Ünite: Madde ve Isı":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif6Unite4
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif6Unite4 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif6unite4 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "5.Ünite: Ses ve Özellikleri":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif6Unite5
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif6Unite5 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif6unite5 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "6.Ünite: Vücudumuzdaki Sistemler ve Sağlığı":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif6Unite6
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif6Unite6 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif6unite6 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "7.Ünite: Elektriğin İletimi":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif6Unite7
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif6Unite7 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif6unite7 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
@@ -299,127 +231,85 @@ def enter_data():
         # 7. Sınıf
 
         elif query == "1.Ünite: Güneş Sistemi ve Ötesi":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif7Unite1
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif7Unite1 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif7unite1 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
-
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
+            
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "2.Ünite: Hücre ve Bölünmeler":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif7Unite2
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif7Unite2 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif7unite2 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "3.Ünite: Kuvvet ve Enerji":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif7Unite3
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif7Unite3 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif7unite3 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "4.Ünite: Saf Madde ve Karışımlar":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif7Unite4
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif7Unite4 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif7unite4 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "5.Ünite: Işığın Madde ile Etkileşimi":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif7Unite5
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif7Unite5 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif7unite5 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "6.Ünite: Canlılarda Üreme, Büyüme ve Gelişme":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif7Unite6
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif7Unite6 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif7unite6 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "7.Ünite: Elektrik Devreleri":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif7Unite7
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif7Unite7 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif7unite7 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
@@ -427,124 +317,82 @@ def enter_data():
         # 8. Sınıf
 
         elif query == "1.Ünite: Mevsimler ve İklim":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif8Unite1
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif8Unite1 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif8unite1 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "2.Ünite: DNA ve Genetik Kod":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif8Unite2
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif8Unite2 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif8unite2 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "3.Ünite: Basınç":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif8Unite3
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif8Unite3 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif8unite3 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
         elif query == "4.Ünite: Madde ve Endüstri":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif8Unite4
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif8Unite4 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif8unite4 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "5.Ünite: Basit Makineler":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif8Unite5
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif8Unite5 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif8unite5 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "6.Ünite: Enerji Dönüşümleri ve Çevre Bilimi":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif8Unite6
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif8Unite6 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif8unite6 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "7.Ünite: Elektrik Yükleri ve Elektrik Enerjisi":
-            conn = sqlite3.connect("sorugiris.db")
-            table_create_query = '''CREATE TABLE IF NOT EXISTS Sinif8Unite7
-            (question TEXT, aopt TEXT, bopt TEXT, copt TEXT, dopt TEXT, correct TEXT)'''
-            conn.execute(table_create_query)
-
-            # Insert Entry
-            data_insert_query = '''INSERT INTO Sinif8Unite7 (question, aopt, bopt, copt, dopt, correct) VALUES (?,?,?,?,?,?)'''
+            mycursor = mydb.cursor()
+            
+            sql = "INSERT INTO sinif8unite7 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
             data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
-
-            cursor = conn.cursor()
-            cursor.execute(data_insert_query, data_insert_tuple)
-            conn.commit()
-            conn.close()
+            
+            mycursor.execute(sql,data_insert_tuple)
+            mydb.commit()
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
