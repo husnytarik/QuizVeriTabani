@@ -1,1 +1,1 @@
-"# QuizVeriTabani" 
+Quiz local veri tabanı 
