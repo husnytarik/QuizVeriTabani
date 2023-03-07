@@ -1,6 +1,8 @@
 import tkinter
 from tkinter import ttk
 from tkinter import messagebox
+from tkinter.messagebox import askyesno
+
 import os
 import openpyxl
 import mysql.connector
@@ -44,8 +46,7 @@ def enter_data():
         print("Soru1:", question)
         print("A.", aopt, "B.", bopt)
         print("C.", copt, "D.", dopt)
-        print("Doğru Yanıt:", correct)
-
+        print("Doğru Yanıt:", correct)        
         query = unit_combobox.get()
 
         # 5. Sınıf
@@ -418,13 +419,27 @@ def enter_data():
             mydb.commit()
 
             tkinter.messagebox.showwarning(
-                title="Başarılı", message="Kayıt Başarılı")
-
+                title="Başarılı", message="Kayıt Başarılı")        
+        
         #Error
 
         else:
             tkinter.messagebox.showwarning(title="Kayıt Başarısız", message="Ünite Seçiniz")
 
+        question_entry.delete('1.0',"end")
+        a_option_entry.delete('0',"end")
+        b_option_entry.delete('0',"end")
+        c_option_entry.delete('0',"end")
+        d_option_entry.delete('0',"end")
+        correct_answer_combobox.current(0)
+        
+        
+
+def confirm():
+    answer = askyesno(title='Çıkış',
+                    message='Çıkmak İstediğinden Emin Misin?')
+    if answer:
+        window.destroy()
 
 # Window
 window = tkinter.Tk()
@@ -485,19 +500,26 @@ unit_combobox = ttk.Combobox(grade_unit_frame, value=gradeempty, width=60)
 unit_combobox.current(0)
 unit_combobox.grid(row=1, padx=5, pady=5)
 
+#BLOB İmaj Giriş FRAME
+blob_image_frame = tkinter.LabelFrame(frame, text="Görüntü", labelanchor='n', bd=0)
+blob_image_frame.grid(row=1, column=0, padx=20, pady=0, sticky="news")
 
-# Soru
+#BLOB İmaj Giriş
+#blob_image_upload =
+
+
+# Soru Giriş Frame
 question_frame = tkinter.LabelFrame(frame, text="Soru", labelanchor='n', bd=0)
-question_frame.grid(row=1, column=0, padx=20, pady=0, sticky="news")
+question_frame.grid(row=2, column=0, padx=20, pady=0, sticky="news")
 
 question_entry = tkinter.Text(
     question_frame, relief="sunken", height=10, width="50")
 question_entry.grid(row=1, column=0)
 
-
+# Soru Giriş
 # Options
 options_frame = tkinter.LabelFrame(frame, text="Şıklar", labelanchor='n', bd=0)
-options_frame.grid(row=2, column=0, sticky="news", padx=20, pady=10)
+options_frame.grid(row=3, column=0, sticky="news", padx=20, pady=10)
 
 # A Option
 a_option_label = tkinter.Label(options_frame, text="A.")
@@ -528,21 +550,34 @@ d_option_entry = tkinter.Entry(options_frame, width=32)
 d_option_entry.grid(row=4, column=1)
 
 
-# Correct Answer
+# Doğru Yanıt Frame
 correct_answer_frame = tkinter.LabelFrame(
     frame, text="Doğru Yanıt", labelanchor='n', bd=0)
-correct_answer_frame.grid(row=3, column=0, sticky="news", padx=20, pady=10)
+correct_answer_frame.grid(row=4, column=0, sticky="news", padx=20, pady=10)
 
+
+# Doğru Yanıt
 correct_answer_label = tkinter.Label(correct_answer_frame)
 correct_answer_label.grid(row=0, column=0)
 
-correct_answer_combobox = ttk.Combobox(correct_answer_frame, values=[
-                                       "A", "B", "C", "D"], width=55, validate='all')
+correct_answer_combobox = ttk.Combobox(correct_answer_frame, values=["Cevabı Seçin","A", "B", "C", "D"], width=55, validate='all')
+correct_answer_combobox.current(0)
 correct_answer_combobox.grid(row=0, column=0, padx=20, pady=5, sticky="news")
 
 
-# Button
-button = tkinter.Button(frame, text="Kaydet", command=enter_data)
-button.grid(row=4, column=0, sticky="news")
+# Buttons Frame
+buttons_frame = tkinter.Frame(frame)
+buttons_frame.grid()
+
+
+# Buttons
+#Kaydet
+button_save = tkinter.Button(buttons_frame, text="Kaydet", command=enter_data, width="10", height="2")
+button_save.grid(row=0, column=0)
+
+#Çıkış
+button_quit = tkinter.Button(buttons_frame, text="Çıkış", command=confirm, width="10", height="2")
+button_quit.grid(row=0, column=1, padx=10, pady=10)
+
 
 window.mainloop()
