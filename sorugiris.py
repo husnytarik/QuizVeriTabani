@@ -2,6 +2,9 @@ import tkinter
 from tkinter import ttk
 from tkinter import messagebox
 from tkinter.messagebox import askyesno
+from tkinter import filedialog
+from PIL import Image, ImageOps, ImageTk, ImageFilter
+
 
 import os
 import openpyxl
@@ -447,8 +450,10 @@ window.title("Soru Giris Ekranı")
 
 # Frame
 frame = tkinter.Frame(window, bd=10)
-frame.pack()
+frame.pack(side="left", fill="y")
 
+frameRight = tkinter.Frame(window, bd=10)
+frameRight.pack()
 
 def pick_grade(e):
     if grade_combobox.get() == "5":
@@ -468,6 +473,20 @@ def pick_grade(e):
         unit_combobox.current(0)
 
 
+file_path = ""
+
+def add_image():
+    global file_path
+    file_path = filedialog.askopenfilename(initialdir="")
+    image = Image.open(file_path)
+    width, height = int(image.width / 10), int(image.height / 10)
+    image = image.resize((width,height), Image.LANCZOS)
+    blob_image_canvas.config(width=image.width, height= image.height)
+    image = ImageTk.PhotoImage(image)
+    blob_image_canvas.image = image
+    blob_image_canvas.create_image(0,0, image = image, anchor="nw")
+    
+        
 # Sınıf-Ünite Seçim
 grade_unit_frame = tkinter.Frame(frame)
 grade_unit_frame.grid(row=0, column=0, padx=20, pady=0, sticky="news")
@@ -500,12 +519,20 @@ unit_combobox = ttk.Combobox(grade_unit_frame, value=gradeempty, width=60)
 unit_combobox.current(0)
 unit_combobox.grid(row=1, padx=5, pady=5)
 
+
+
 #BLOB İmaj Giriş FRAME
-blob_image_frame = tkinter.LabelFrame(frame, text="Görüntü", labelanchor='n', bd=0)
-blob_image_frame.grid(row=1, column=0, padx=20, pady=0, sticky="news")
+blob_image_frame = tkinter.LabelFrame(frameRight, text="Görüntü", width=200, height=200, labelanchor='n', bd=0)
+blob_image_frame.grid(row=1)
 
 #BLOB İmaj Giriş
-#blob_image_upload =
+blob_image_upload_button = tkinter.Button(blob_image_frame, text="İmaj Ekle", command=add_image)
+blob_image_upload_button.grid(row=1)
+
+#Blob İmaj Görüntüle
+blob_image_canvas = tkinter.Canvas(blob_image_frame, width=200, height=200, background="white")
+blob_image_canvas.grid(row=0, padx=10, pady=10)
+
 
 
 # Soru Giriş Frame
