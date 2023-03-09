@@ -16,8 +16,32 @@ mydb = mysql.connector.connect(host="sql7.freesqldatabase.com",
   password="ePbVUdumsC",
   database="sql7602430"
 )
-
 #commit test edildi
+
+file_path = ""
+    
+   
+def remove_image():
+    global file_path
+    file_path = ""
+    blob_image_canvas.delete(canvasimage)
+    blob_image_canvas.config(width=50, height= 50)     
+
+def add_image():
+    global file_path 
+    global canvasimage
+    file_path = filedialog.askopenfilename(title='İmaj Seç', initialdir='')    
+    if file_path != "":
+        image = Image.open(file_path)
+        width, height = int(image.width / 10), int(image.height / 10)
+        image = image.resize((width,height), Image.LANCZOS)
+        blob_image_canvas.config(width=image.width, height= image.height)
+        image = ImageTk.PhotoImage(image)
+        blob_image_canvas.image = image
+        canvasimage = blob_image_canvas.create_image(0,0, image = image, anchor="nw")
+        print(file_path)
+
+
 
 def enter_data():
     question = question_entry.get("1.0", "end-1c")
@@ -49,7 +73,8 @@ def enter_data():
         print("Soru1:", question)
         print("A.", aopt, "B.", bopt)
         print("C.", copt, "D.", dopt)
-        print("Doğru Yanıt:", correct)        
+        print("Doğru Yanıt:", correct)
+        print(file_path)       
         query = unit_combobox.get()
 
         # 5. Sınıf
@@ -57,93 +82,142 @@ def enter_data():
         if query == "1.Ünite: Güneş, Dünya ve Ay":
             
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite1 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite1 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")
+            sql = "INSERT INTO sinif5unite1 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif5unite1 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
-            
-            print(mycursor.rowcount, "record inserted.")
+            mydb.commit()                   
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
+        
         elif query == "2.Ünite: Canlılar Dünyası":
-            mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite2 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
             
-            sql = "INSERT INTO sinif5unite2 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            mycursor = mydb.cursor()            
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite2 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif5unite2 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
+            
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()           
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "3.Ünite: Kuvvetin Ölçülmesi ve Sürtünme":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite3 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite3 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif5unite3 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif5unite3 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "4.Ünite: Madde ve Değişim":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite4 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite4 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif5unite4 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif5unite4 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "5.Ünite: Işığın Yayılması":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite5 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite5 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif5unite5 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif5unite5 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "6.Ünite: İnsan ve Çevre":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite6 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite6 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif5unite6 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif5unite6 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "7.Ünite: Elektrik Devre Elemanları":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite7 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif5unite7 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif5unite7 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif5unite7 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
@@ -152,91 +226,143 @@ def enter_data():
 
         elif query == "1.Ünite: Güneş Sistemi ve Tutulmalar":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite1 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite1 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif6unite1 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif6unite1 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "2.Ünite: Vücudumuzdaki Sistemler":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite2 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite2 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif6unite2 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif6unite2 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "3.Ünite: Kuvvet ve Hareket":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite3 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite3 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif6unite3 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif6unite3 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "4.Ünite: Madde ve Isı":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite4 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite4 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif6unite4 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif6unite4 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "5.Ünite: Ses ve Özellikleri":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite5 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite5 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif6unite5 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif6unite5 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            print(file_path)
+            if file_path != "":
+                print("image found")
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                print("image not found")
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "6.Ünite: Vücudumuzdaki Sistemler ve Sağlığı":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite6 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite6 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif6unite6 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif6unite6 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "7.Ünite: Elektriğin İletimi":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite7 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif6unite7 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif6unite7 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif6unite7 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
@@ -245,91 +371,140 @@ def enter_data():
 
         elif query == "1.Ünite: Güneş Sistemi ve Ötesi":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite1 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite1 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif7unite1 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif7unite1 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
             
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "2.Ünite: Hücre ve Bölünmeler":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite2 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite2 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif7unite2 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif7unite2 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "3.Ünite: Kuvvet ve Enerji":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite3 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite3 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif7unite3 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif7unite3 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "4.Ünite: Saf Madde ve Karışımlar":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite4 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite4 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif7unite4 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif7unite4 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "5.Ünite: Işığın Madde ile Etkileşimi":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite5 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite5 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif7unite5 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif7unite5 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "6.Ünite: Canlılarda Üreme, Büyüme ve Gelişme":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite6 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite6 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif7unite6 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif7unite6 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "7.Ünite: Elektrik Devreleri":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite7 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif7unite7 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif7unite7 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif7unite7 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
@@ -338,85 +513,134 @@ def enter_data():
 
         elif query == "1.Ünite: Mevsimler ve İklim":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite1 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite1 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif8unite1 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif8unite1 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "2.Ünite: DNA ve Genetik Kod":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite2 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite2 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif8unite2 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif8unite2 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "3.Ünite: Basınç":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite3 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite3 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif8unite3 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif8unite3 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
         elif query == "4.Ünite: Madde ve Endüstri":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite4 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite4 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif8unite4 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif8unite4 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "5.Ünite: Basit Makineler":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite5 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite5 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif8unite5 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif8unite5 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "6.Ünite: Enerji Dönüşümleri ve Çevre Bilimi":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite6 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite6 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif8unite6 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif8unite6 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()                
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
-            mydb.commit()
+            mydb.commit()  
 
             tkinter.messagebox.showwarning(
                 title="Başarılı", message="Kayıt Başarılı")
             
         elif query == "7.Ünite: Elektrik Yükleri ve Elektrik Enerjisi":
             mycursor = mydb.cursor()
-            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite7 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS sinif8unite7 (question VARCHAR(45), aopt VARCHAR(45), bopt VARCHAR(45), copt VARCHAR(45), dopt VARCHAR(45), correct VARCHAR(45), image BLOB)")            
+            sql = "INSERT INTO sinif8unite7 (question, aopt, bopt, copt, dopt, correct, image) VALUES(%s,%s,%s,%s,%s,%s,%s)" 
             
-            sql = "INSERT INTO sinif8unite7 (question, aopt, bopt, copt, dopt, correct) VALUES(%s,%s,%s,%s,%s,%s)" 
-            data_insert_tuple = (question, aopt, bopt, copt, dopt, correct)
+            if file_path != "":
+                with open(file_path, 'rb') as file:
+                    BinaryData = file.read() 
+                print(len("BinaryData"))
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, BinaryData)
+                remove_image()     
+            else:
+                data_insert_tuple = (question, aopt, bopt, copt, dopt, correct, "")      
             
             mycursor.execute(sql,data_insert_tuple)
             mydb.commit()
@@ -425,7 +649,6 @@ def enter_data():
                 title="Başarılı", message="Kayıt Başarılı")        
         
         #Error
-
         else:
             tkinter.messagebox.showwarning(title="Kayıt Başarısız", message="Ünite Seçiniz")
 
@@ -434,8 +657,8 @@ def enter_data():
         b_option_entry.delete('0',"end")
         c_option_entry.delete('0',"end")
         d_option_entry.delete('0',"end")
-        correct_answer_combobox.current(0)
-        
+        correct_answer_combobox.current(0)    
+        print(file_path)
         
 
 def confirm():
@@ -473,19 +696,7 @@ def pick_grade(e):
         unit_combobox.current(0)
 
 
-file_path = ""
-
-def add_image():
-    global file_path
-    file_path = filedialog.askopenfilename(initialdir="")
-    image = Image.open(file_path)
-    width, height = int(image.width / 10), int(image.height / 10)
-    image = image.resize((width,height), Image.LANCZOS)
-    blob_image_canvas.config(width=image.width, height= image.height)
-    image = ImageTk.PhotoImage(image)
-    blob_image_canvas.image = image
-    blob_image_canvas.create_image(0,0, image = image, anchor="nw")
-    
+                
         
 # Sınıf-Ünite Seçim
 grade_unit_frame = tkinter.Frame(frame)
@@ -599,7 +810,7 @@ buttons_frame.grid()
 
 # Buttons
 #Kaydet
-button_save = tkinter.Button(buttons_frame, text="Kaydet", command=enter_data, width="10", height="2")
+button_save = tkinter.Button(buttons_frame, text="Kaydet", command=enter_data , width="10", height="2")
 button_save.grid(row=0, column=0)
 
 #Çıkış
